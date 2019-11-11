@@ -32,6 +32,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.latihan201.MainActivity" />
         </activity>
+        <activity
+            android:name=".ContactAdd"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.latihan201.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

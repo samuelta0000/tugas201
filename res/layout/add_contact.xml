@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+<TextView android:id="@+id/judul"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_centerHorizontal="true"
+    android:text="ISI CONTACT BARU"/>
+    
+<TextView 
+    android:id="@+id/name"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:text="Isi nama anda"
+    android:layout_below="@+id/judul"/>
+
+<EditText 
+    android:id="@+id/etname"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_below="@+id/name"
+    android:text=""
+    />
+
+<TextView 
+    android:id="@+id/email"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:text="Isi email anda"
+    android:layout_below="@+id/etname"/>
+
+<EditText 
+    android:id="@+id/etemail"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_below="@+id/email"
+    android:text=""
+    />
+
+<TextView 
+    android:id="@+id/phone"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:text="Isi no handphone anda"
+    android:layout_below="@+id/etemail"/>
+
+<EditText 
+    android:id="@+id/etphone"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_below="@+id/phone"
+    android:text=""
+    />
+
+<TextView 
+    android:id="@+id/address"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:text="Isi alamat anda"
+    android:layout_below="@+id/etphone"/>
+
+<EditText 
+    android:id="@+id/etaddress"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_below="@+id/address"
+    android:text=""
+    />
+
+<TextView 
+    android:id="@+id/dob"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:text="Isi tanggal lahir anda"
+    android:layout_below="@+id/etaddress"/>
+
+<EditText 
+    android:id="@+id/etdob"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_below="@+id/dob"
+    android:text=""
+    />
+
+<Button
+    android:id="@+id/kirim"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/etdob"
+    android:text="KIRIM"
+    />
+
+<Button
+    android:id="@+id/kembali"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/kirim"
+    android:text="KEMBALI"
+    />
+
+</RelativeLayout>

@@ -6,7 +6,7 @@
 
     <TextView 
         android:id="@+id/tvname"
-        android:text="Who am I"
+        android:text="name"
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
     
     <TextView 
         android:id="@+id/tvaddressv"
-        android:text="Hello World Street"
+        android:text="u can find me now"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvaddressl"
@@ -60,7 +60,7 @@
     
     <TextView 
         android:id="@+id/tvphonev"
-        android:text="+621233123123"
+        android:text="+64144smua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvphonel"
@@ -119,5 +119,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvupdatedl"
         />
+    
+    <Button
+    android:id="@+id/kembali"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/tvupdatedv"
+    android:text="KEMBALI"
+    />
 
 </RelativeLayout>

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -24,6 +25,7 @@ public class MainActivity extends Activity {
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
     private ListView lv;
+    private Button btntambah;
  
     // URL to get contacts JSON
     private static String url = "http://apilearning.totopeto.com/contacts";
@@ -38,9 +40,22 @@ public class MainActivity extends Activity {
         contactList = new ArrayList<HashMap<String, String>>();
         
         lv = (ListView) findViewById(R.id.list);
+        btntambah=(Button)findViewById(R.id.tambah);
+        
+        btntambah.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				 //TODO Auto-generated method stub
+				Intent intentTambahContact=new Intent(MainActivity.this,ContactAdd.class);
+				startActivity(intentTambahContact);
+			}
+		});
  
         new GetContacts().execute();
         
+        
+        	
         lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -50,16 +65,11 @@ public class MainActivity extends Activity {
 				HashMap<String, String> hm = contactList.get(arg2);
 				
 				Intent intentContactDetails = new Intent(MainActivity.this, ContactDetails.class);
-				intentContactDetails.putExtra("name", hm.get("name"));
-				intentContactDetails.putExtra("address", hm.get("address"));
-				intentContactDetails.putExtra("email", hm.get("email"));
-				intentContactDetails.putExtra("phone", hm.get("phone"));
-				intentContactDetails.putExtra("dob", hm.get("dob"));
-				intentContactDetails.putExtra("created_at", hm.get("created_at"));
-				intentContactDetails.putExtra("updated_at", hm.get("updated_at"));
+				intentContactDetails.putExtra("id", hm.get("id"));
 				startActivity(intentContactDetails);				
 			}
 		});
+        
     }
 
 
