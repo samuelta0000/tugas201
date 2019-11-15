@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
 			}
 		});
  
-        new GetContacts().execute();
+        //new GetContacts().execute();
         
         
         	
@@ -64,9 +64,13 @@ public class MainActivity extends Activity {
 				//Toast.makeText(MainActivity.this, "Tested!", Toast.LENGTH_SHORT).show();
 				HashMap<String, String> hm = contactList.get(arg2);
 				
-				Intent intentContactDetails = new Intent(MainActivity.this, ContactDetails.class);
-				intentContactDetails.putExtra("id", hm.get("id"));
-				startActivity(intentContactDetails);				
+				//Intent intentContactDetails = new Intent(MainActivity.this, ContactDetails.class);
+				Intent intentInboxOutbox=new Intent(MainActivity.this,MainFragmentActivity.class);
+				//intentContactDetails.putExtra("id", hm.get("id"));
+				intentInboxOutbox.putExtra("id", hm.get("id"));
+				intentInboxOutbox.putExtra("name", hm.get("name"));
+				//startActivity(intentContactDetails);			
+				startActivity(intentInboxOutbox);
 			}
 		});
         
@@ -89,7 +93,7 @@ public class MainActivity extends Activity {
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
- 
+
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url);
  
@@ -180,5 +184,10 @@ public class MainActivity extends Activity {
             lv.setAdapter(adapter);
         }
  
-    }   
+    }
+    
+    public void onResume(){
+ 	   super.onResume();
+ 	   new GetContacts().execute();
+    }
 }
