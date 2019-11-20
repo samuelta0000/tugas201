@@ -21,8 +21,10 @@ public class MainFragmentActivity extends Activity {
 		Intent intent=getIntent();
 		contactin=intent.getStringExtra("id");
 		contact_name=intent.getStringExtra("name");
+		
 		Bundle bundle=new Bundle();
 		bundle.putString("id", contactin);
+		bundle.putString("name", contact_name);
 		fragmentTabInbox.setArguments(bundle);
 		fragmentTabOutbox.setArguments(bundle);
 		

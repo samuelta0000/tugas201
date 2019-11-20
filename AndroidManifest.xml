@@ -46,6 +46,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.latihan201.MainActivity" />
         </activity>
+        <activity
+            android:name=".PesanBaru" 
+            android:parentActivityName=".MainFragmentActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.latihan201.MainActivity" />
+        </activity>
+        <activity
+            android:name=".BalasPesan"
+            android:parentActivityName=".MainFragmentActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.latihan201.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

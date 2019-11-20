@@ -1,24 +1,32 @@
 
 package com.example.latihan201;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 
 public class FragmentInbox extends Fragment{
@@ -29,9 +37,11 @@ public class FragmentInbox extends Fragment{
     String url="http://apilearning.totopeto.com/messages/inbox?id=";
     ArrayList<HashMap<String,String>> inboxList;
     TextView tinbox;
+    Button pbpesan;
     ListView linbox;
     String inbox_count;
-    String contactin;
+    String contactin,contactn;
+    
     
 
 	@Override
@@ -40,10 +50,47 @@ public class FragmentInbox extends Fragment{
 		
         tinbox=(TextView)rootView.findViewById(R.id.tvinbox);
         linbox=(ListView)rootView.findViewById(R.id.lvinbox);
-        
-        inboxList=new ArrayList<HashMap<String,String>>();
+        pbpesan=(Button)rootView.findViewById(R.id.btntlspesan);
         
         contactin=getArguments().getString("id");
+        contactn=getArguments().getString("name");
+        
+        pbpesan.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(FragmentInbox.this.getActivity(),PesanBaru.class);
+				intent.putExtra("name", contactn);
+				intent.putExtra("id", contactin);
+				
+				startActivity(intent);
+				
+			}
+		});
+        
+        linbox.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				//Toast.makeText(MainActivity.this, "Tested!", Toast.LENGTH_SHORT).show();
+				HashMap<String, String> hm =inboxList.get(arg2);
+				
+				//Intent intentContactDetails = new Intent(MainActivity.this, ContactDetails.class);
+				Intent intent=new Intent(getActivity(),BalasPesan.class);
+				//intentContactDetails.putExtra("id", hm.get("id"));
+				intent.putExtra("id", hm.get("id"));
+				intent.putExtra("from_id", hm.get("from_id"));
+				intent.putExtra("content", hm.get("content"));
+				intent.putExtra("from", hm.get("from"));
+				intent.putExtra("contactin", contactin);
+				//startActivity(intentContactDetails);			
+				startActivity(intent);
+			}
+		});
+        
+        inboxList=new ArrayList<HashMap<String,String>>();
         
         return rootView;
 
@@ -62,7 +109,7 @@ public class FragmentInbox extends Fragment{
  
         }
  
-        @Override
+        @SuppressLint("SimpleDateFormat") @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
  
@@ -83,10 +130,15 @@ public class FragmentInbox extends Fragment{
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject c = data.getJSONObject(i);
 
-                        String idi=c.getString("id");
+                        String id=c.getString("id");
+                        String from_id=c.getString("from_id");
                         String content = c.getString("content");
                         
-                        String created_at = c.getString("created_at");
+                        String date=c.getString("created_at");
+                        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+                        Date dated=format.parse(date);
+                        String created_at=format.format(dated);
+                        
                         
                         String from = c.getString("from");
  
@@ -94,12 +146,14 @@ public class FragmentInbox extends Fragment{
                         HashMap<String, String> inbox= new HashMap<String, String>();
  
                         // adding each child node to HashMap key => value
-                        inbox.put("id", idi);
+                        inbox.put("id", id);
+                        inbox.put("from_id", from_id);
                         inbox.put("content", content);
                         inbox.put("created_at", created_at);
                         inbox.put("from", from);
  
                         // adding inboxList to inboxList list
+                        
                         inboxList.add(inbox);
                     }
                     
@@ -111,7 +165,10 @@ public class FragmentInbox extends Fragment{
                             Toast.LENGTH_LONG)
                             .show();
                 
-                }
+                } catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
  

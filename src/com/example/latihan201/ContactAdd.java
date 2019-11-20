@@ -52,6 +52,7 @@ public class ContactAdd extends Activity {
 				// TODO Auto-generated method stub
 				Intent intentcancel=new Intent(ContactAdd.this,MainActivity.class);
 				startActivity(intentcancel);
+				finish();
 			}
 		});
 		

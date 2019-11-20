@@ -3,11 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
+    <Button 
+        android:id="@+id/btntlspesan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TULIS PESAN"
+        android:textSize="14sp"/>
+    
 	<ListView 
 	    android:id="@+id/lvinbox"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
+	    android:layout_below="@+id/btntlspesan"
 	    ></ListView>
 	
 	<TextView 

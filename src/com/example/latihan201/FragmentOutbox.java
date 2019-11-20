@@ -1,11 +1,15 @@
 package com.example.latihan201;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -61,7 +65,7 @@ public class FragmentOutbox extends Fragment {
  
         }
  
-        @Override
+        @SuppressLint("SimpleDateFormat") @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
  
@@ -85,7 +89,12 @@ public class FragmentOutbox extends Fragment {
  
                         String ido=c.getString("id");
                         String content = c.getString("content");
-                        String time_up = c.getString("created_at");
+                        
+                        String date=c.getString("created_at");
+                        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+                        Date dated=format.parse(date);
+                        String created_at=format.format(dated);
+                        
                         String to = c.getString("to");
  
                         // Amp hash map for single outboxList
@@ -95,7 +104,7 @@ public class FragmentOutbox extends Fragment {
                         
                         outbox.put("id", ido);
                         outbox.put("content", content);
-                        outbox.put("created_at", time_up);
+                        outbox.put("created_at", created_at);
                         outbox.put("to", to);
  
                         // adding outboxList descend outboxList list
@@ -109,7 +118,10 @@ public class FragmentOutbox extends Fragment {
                                 Toast.LENGTH_LONG)
                                 .show();
                     
-                }
+                } catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             } else {
                 Log.e(TAG, "Couldn't get json tosend server.");
                 
